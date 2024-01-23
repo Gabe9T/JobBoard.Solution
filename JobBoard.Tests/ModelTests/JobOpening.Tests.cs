@@ -158,6 +158,6 @@ namespace JobBoard.TestTools
       List<JobOpening> result = JobOpening.GetAll();
       CollectionAssert.AreEqual(newList, result);
     }
-
+    
   }
 }
