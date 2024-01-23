@@ -67,6 +67,7 @@ namespace JobBoard.TestTools
       string result = newJob.Description;
       Assert.AreEqual(description, result);
     }
+    [TestMethod]
     public void SetDescription_SetsValueOfDescription_String()
     {
       Dictionary<string, string> contact = new Dictionary<string, string>
@@ -83,6 +84,7 @@ namespace JobBoard.TestTools
       string result = newJob.Description;
       Assert.AreEqual(updatedDescription, result);
     }
+    [TestMethod]
     public void GetContactInfo_ReturnsContactInfo_Object()
     {
       string title = "Dog Walker";
@@ -96,6 +98,29 @@ namespace JobBoard.TestTools
       JobOpening newJob = new JobOpening(title, description, contact);
       Dictionary<string, string> result = newJob.ContactInfo;
       CollectionAssert.AreEquivalent(contact, result);
+    }
+    
+    [TestMethod]
+      public void SetContactInfo_ReturnsContactInfo_Object()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      Dictionary<string, string> contact = new Dictionary<string, string>
+      {
+        {"name", "Kim"},
+        {"email", "abc@gmail.com"},
+        {"phone", "5551234567"}
+      };
+      JobOpening newJob = new JobOpening(title, description, contact);
+      Dictionary<string, string> newContact = new Dictionary<string, string>
+      {
+        {"name", "Ravin"},
+        {"email", "the@email.com"},
+        {"phone", "5895554789"}
+      };
+      newJob.ContactInfo = newContact;
+      Dictionary<string, string> result = newJob.ContactInfo;
+      CollectionAssert.AreEquivalent(newContact, result);
     }
 
   }
