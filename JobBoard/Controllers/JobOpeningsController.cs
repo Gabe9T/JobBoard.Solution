@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 namespace JobBoard.Controllers
 {
-  public class JobOpeningController : Controller
+  public class JobOpeningsController : Controller
   {
-    [HttpGet("/jobopening")]
+    [HttpGet("/jobopenings")]
     public ActionResult Index()
     {
       List<JobOpening> allJobs = JobOpening.GetAll();
       return View(allJobs);
     }
-    [HttpGet("/jobopening/new")]
+    [HttpGet("/jobopenings/new")]
     public ActionResult CreateForm()
     {
       return View();
     }
-    [HttpPost("/jobopening")]
+    [HttpPost("/jobopenings")]
     public ActionResult Create(string title, string description, Dictionary<string, string> contact)
     {
       JobOpening newJob = new JobOpening(title, description, contact);

@@ -12,19 +12,27 @@
   @using JobBoard.Models
 
   <h1>Job Postings:</h1>
+  <hr />
   @if (Model.Count == 0)
   {
     <p>There are no job postings at this time.</p>
   }
-  <ul>
+  <div>
     @foreach (JobOpening jobopening in Model)
     {
-      <li>@jobopening.Title</li>
-      <li>@jobopening.Description</li>
-      <li>@jobopening.ContactInfo</li>
+      <h4>Job Title: @jobopening.Title</h4>
+      <h6>Description: @jobopening.Description</h6>
+      <p>Contact Info: </p>
+      <ul>
+        @foreach (KeyValuePair<string, string> contact in jobopening.ContactInfo)
+        {
+          <li>@contact.Key: @contact.Value</li>
+        }
+      </ul>
+      <hr />
     }
-  </ul>
-  <a href="/items/new">Add a new job posting.</a>
+  </div>
+  <a href="/jobopenings/new">Add a new job posting.</a>
 </body>
 
 </html>
