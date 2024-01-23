@@ -159,7 +159,7 @@ namespace JobBoard.TestTools
       CollectionAssert.AreEqual(newList, result);
     }
     [TestMethod]
-    public void GetId_ItemsInstantiateWithAnIdAndGetterReturns_Int()
+    public void GetId_JobsInstantiateWithAnIdAndGetterReturns_Int()
     {
       string title = "Dog Walker";
       string description = "I walk dogs.";
@@ -173,6 +173,31 @@ namespace JobBoard.TestTools
 
       int result = newJob.Id;
       Assert.AreEqual(1, result);
+    }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectJob_JobOpening()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      Dictionary<string, string> contact = new Dictionary<string, string>
+      {
+        {"name", "Kim"},
+        {"email", "abc@gmail.com"},
+        {"phone", "5551234567"}
+      };
+      JobOpening newJob = new JobOpening(title, description, contact);
+      string title1 = "Dog Groomer";
+      string description1 = "I groom dogs.";
+      Dictionary<string, string> contact1 = new Dictionary<string, string>
+      {
+        {"name", "Ravin"},
+        {"email", "dcb@gmail.com"},
+        {"phone", "5551234567"}
+      };
+      JobOpening newJob1 = new JobOpening(title1, description1, contact1);
+      JobOpening result = JobOpening.Find(2);
+      Assert.AreEqual(newJob1, result);
     }
     
   }

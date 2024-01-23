@@ -25,5 +25,10 @@ namespace JobBoard.Models
     {
       _instances.Clear(); //can't access _instances here b/c no return and _inst is private
     }
+
+    public static JobOpening Find(int searchID)
+    {
+      return _instances[searchID-1];
+    }
   }
 }
