@@ -24,7 +24,6 @@ namespace JobBoard.TestTools
       JobOpening newJobOpening = new JobOpening("Dog Walker", "desc", contact);
       Assert.AreEqual(typeof(JobOpening), newJobOpening.GetType());
     }
-
     [TestMethod]
     public void GetTitle_ReturnsTitle_String()
     {
@@ -130,6 +129,32 @@ namespace JobBoard.TestTools
     public void GetAll_ReturnsEmptyList_JobOpeningList()
     {
       List<JobOpening> newList = new List<JobOpening> { };
+      List<JobOpening> result = JobOpening.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsJobOpening_JobOpeningList()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      Dictionary<string, string> contact = new Dictionary<string, string>
+      {
+        {"name", "Kim"},
+        {"email", "abc@gmail.com"},
+        {"phone", "5551234567"}
+      };
+      JobOpening newJob = new JobOpening(title, description, contact);
+      string title1 = "Dog Groomer";
+      string description1 = "I groom dogs.";
+      Dictionary<string, string> contact1 = new Dictionary<string, string>
+      {
+        {"name", "Ravin"},
+        {"email", "dcb@gmail.com"},
+        {"phone", "5551234567"}
+      };
+      JobOpening newJob1 = new JobOpening(title, description, contact);
+      List<JobOpening> newList = new List<JobOpening> { newJob, newJob1};
       List<JobOpening> result = JobOpening.GetAll();
       CollectionAssert.AreEqual(newList, result);
     }
