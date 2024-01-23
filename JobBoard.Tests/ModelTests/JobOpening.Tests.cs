@@ -43,6 +43,16 @@ namespace JobBoard.TestTools
       string result = newJob.Description;
       Assert.AreEqual(description, result);
     }
+    public void SetDescription_SetsValueOfDescription_String()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      JobOpening newJob = new JobOpening(title, description);
+      string updatedDescription = "I cook things";
+      newJob.Description = updatedDescription;
+      string result = newJob.Description;
+      Assert.AreEqual(updatedDescription, result);
+    }
 
   }
 }
