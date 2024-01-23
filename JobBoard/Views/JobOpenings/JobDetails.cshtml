@@ -14,23 +14,21 @@
   <h1>Job Listing:</h1>
   <hr />
   <!-- NOT WORKING -->
-  <div> 
-    @foreach (JobOpening jobopening in Model)
-    {
-      <h4>Job Title: @jobopening.Title</h4>
+  <div>
 
-      <h6>Description: @jobopening.Description</h6>
-      <p>Contact Info: </p>
-      <ul>
-        @foreach (KeyValuePair<string, string> contact in jobopening.ContactInfo)
-        {
-          <li>@contact.Key: @contact.Value</li>
-        }
-      </ul>
-      <hr />
-    }
+    <h4>Title: @Model.Title</h4>
+
+    <h6>Description: @Model.Description</h6>
+    <p>Contact Info: </p>
+    <ul>
+      @foreach (KeyValuePair<string, string> contact in Model.ContactInfo)
+      {
+        <li>@contact.Key: @contact.Value</li>
+      }
+    </ul>
   </div>
   <a href="/jobopenings/new">Add a new job posting.</a>
+  <a href="/jobopenings">Back to Job Listings</a>
 </body>
 
 </html>

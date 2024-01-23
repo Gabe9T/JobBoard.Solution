@@ -27,11 +27,11 @@ namespace JobBoard.Controllers
     }
     
 //NOTWORKING
-    [HttpGet("/jobopenings/details")]
-    public ActionResult JobDetails()
+    [HttpGet("/jobopenings/{id}")]
+    public ActionResult JobDetails(int id)
     {
-      
-      return View(JobDetails);
+      JobOpening foundJob = JobOpening.Find(id);
+      return View(foundJob);
     }
 
     // [HttpPost("/jobopenings/details")]
