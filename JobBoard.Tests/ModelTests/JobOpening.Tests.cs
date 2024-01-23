@@ -23,6 +23,16 @@ namespace JobBoard.TestTools
       string result = newJob.Title;
       Assert.AreEqual(title, result);
     }
+    [TestMethod]
+    public void SetTitle_SetsValueOfTitle_String()
+    {
+      string title = "Dog Walker";
+      JobOpening newJob = new JobOpening(title);
+      string updatedTitle = "Line Cook";
+      newJob.Title = updatedTitle;
+      string result = newJob.Title;
+      Assert.AreEqual(updatedTitle, result);
+    }
 
   }
 }
