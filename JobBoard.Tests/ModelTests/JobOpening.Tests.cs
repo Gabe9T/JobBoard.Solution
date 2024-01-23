@@ -158,6 +158,22 @@ namespace JobBoard.TestTools
       List<JobOpening> result = JobOpening.GetAll();
       CollectionAssert.AreEqual(newList, result);
     }
+    [TestMethod]
+    public void GetId_ItemsInstantiateWithAnIdAndGetterReturns_Int()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      Dictionary<string, string> contact = new Dictionary<string, string>
+      {
+        {"name", "Kim"},
+        {"email", "abc@gmail.com"},
+        {"phone", "5551234567"}
+      };
+      JobOpening newJob = new JobOpening(title, description, contact);
+
+      int result = newJob.Id;
+      Assert.AreEqual(1, result);
+    }
     
   }
 }

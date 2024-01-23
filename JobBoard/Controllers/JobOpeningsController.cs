@@ -12,16 +12,33 @@ namespace JobBoard.Controllers
       List<JobOpening> allJobs = JobOpening.GetAll();
       return View(allJobs);
     }
+
     [HttpGet("/jobopenings/new")]
     public ActionResult CreateForm()
     {
       return View();
     }
+
     [HttpPost("/jobopenings")]
     public ActionResult Create(string title, string description, Dictionary<string, string> contact)
     {
       JobOpening newJob = new JobOpening(title, description, contact);
       return RedirectToAction("Index");
     }
+    
+//NOTWORKING
+    [HttpGet("/jobopenings/details")]
+    public ActionResult JobDetails()
+    {
+      
+      return View(JobDetails);
+    }
+
+    // [HttpPost("/jobopenings/details")]
+    // public ActionResult JobDetails(string title, string description, Dictionary<string, string> contact)
+    // {
+    //   // JobOpening newJob = new JobOpening(title, description, contact);
+    //   return View(JobDetails);
+    // }
   }
 }
