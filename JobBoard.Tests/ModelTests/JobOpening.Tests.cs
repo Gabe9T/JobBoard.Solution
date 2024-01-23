@@ -6,8 +6,12 @@ using System;
 namespace JobBoard.TestTools
 {
   [TestClass]
-  public class JobOpeningTests
+  public class JobOpeningTests : IDisposable
   {
+    public void Dispose()
+    {
+      JobOpening.ClearAll();
+    }
     [TestMethod]
     public void JobOpeningConstructor_CreatesInstanceOfJobOpening_JobOpening()
     {
@@ -121,6 +125,13 @@ namespace JobBoard.TestTools
       newJob.ContactInfo = newContact;
       Dictionary<string, string> result = newJob.ContactInfo;
       CollectionAssert.AreEquivalent(newContact, result);
+    }
+    [TestMethod]
+    public void GetAll_ReturnsEmptyList_JobOpeningList()
+    {
+      List<JobOpening> newList = new List<JobOpening> { };
+      List<JobOpening> result = JobOpening.GetAll();
+      CollectionAssert.AreEqual(newList, result);
     }
 
   }
