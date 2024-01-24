@@ -1,7 +1,9 @@
 body {
   margin: 5rem;
+  background-image: url('./../Images/plant.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: antiquewhite;
-  background-image: url('~/Images/plant.jpg');
 }
 
 button {
