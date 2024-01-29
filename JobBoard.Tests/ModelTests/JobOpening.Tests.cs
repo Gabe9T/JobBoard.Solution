@@ -147,47 +147,23 @@ namespace JobBoard.Tests
       List<JobOpening> result = JobOpening.GetAll();
       CollectionAssert.AreEqual(newList, result);
     }
-    // [TestMethod]
-    // public void GetId_JobsInstantiateWithAnIdAndGetterReturns_Int()
-    // {
-    //   string title = "Dog Walker";
-    //   string description = "I walk dogs.";
-    //   Dictionary<string, string> contact = new Dictionary<string, string>
-    //   {
-    //     {"name", "Kim"},
-    //     {"email", "abc@gmail.com"},
-    //     {"phone", "5551234567"}
-    //   };
-    //   JobOpening newJob = new JobOpening(title, description, contact);
 
-    //   int result = newJob.Id;
-    //   Assert.AreEqual(1, result);
-    // }
-
-    // [TestMethod]
-    // public void Find_ReturnsCorrectJob_JobOpening()
-    // {
-    //   string title = "Dog Walker";
-    //   string description = "I walk dogs.";
-    //   Dictionary<string, string> contact = new Dictionary<string, string>
-    //   {
-    //     {"name", "Kim"},
-    //     {"email", "abc@gmail.com"},
-    //     {"phone", "5551234567"}
-    //   };
-    //   JobOpening newJob = new JobOpening(title, description, contact);
-    //   string title1 = "Dog Groomer";
-    //   string description1 = "I groom dogs.";
-    //   Dictionary<string, string> contact1 = new Dictionary<string, string>
-    //   {
-    //     {"name", "Ravin"},
-    //     {"email", "dcb@gmail.com"},
-    //     {"phone", "5551234567"}
-    //   };
-    //   JobOpening newJob1 = new JobOpening(title1, description1, contact1);
-    //   JobOpening result = JobOpening.Find(2);
-    //   Assert.AreEqual(newJob1, result);
-    // }
+    [TestMethod]
+    public void Find_ReturnsCorrectJobFROMDB_JobOpening()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      string contact = "WWWW.AOL.NET";
+      JobOpening newJob = new JobOpening(title, description, contact);
+      newJob.Save();
+      string title1 = "Dog Groomer";
+      string description1 = "I groom dogs.";
+      string contact1 = "CALL ME:)))";
+      JobOpening newJob1 = new JobOpening(title1, description1, contact1);
+      newJob1.Save();
+      JobOpening result = JobOpening.Find(newJob1.Id);
+      Assert.AreEqual(newJob1, result);
+    }
 
   }
 }
