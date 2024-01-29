@@ -28,24 +28,14 @@ namespace JobBoard.Tests
     [TestMethod]
     public void JobOpeningConstructor_CreatesInstanceOfJobOpening_JobOpening()
     {
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "name:kim";
       JobOpening newJobOpening = new JobOpening("Dog Walker", "desc", contact);
       Assert.AreEqual(typeof(JobOpening), newJobOpening.GetType());
     }
     [TestMethod]
     public void GetTitle_ReturnsTitle_String()
     {
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "name:kim";
       string title = "Dog Walker";
       JobOpening newJob = new JobOpening(title, "desc", contact);
       string result = newJob.Title;
@@ -54,12 +44,7 @@ namespace JobBoard.Tests
     [TestMethod]
     public void SetTitle_SetsValueOfTitle_String()
     {
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "name:kim";
       string title = "Dog Walker";
       JobOpening newJob = new JobOpening(title, "desc", contact);
       string updatedTitle = "Line Cook";
@@ -71,12 +56,7 @@ namespace JobBoard.Tests
     [TestMethod]
     public void GetDescription_ReturnDescription_String()
     {
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "you";
       string title = "Dog Walker";
       string description = "I walk dogs.";
       JobOpening newJob = new JobOpening(title, description, contact);
@@ -86,12 +66,7 @@ namespace JobBoard.Tests
     [TestMethod]
     public void SetDescription_SetsValueOfDescription_String()
     {
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "name:kim";
       string title = "Dog Walker";
       string description = "I walk dogs.";
       JobOpening newJob = new JobOpening(title, description, contact);
@@ -105,15 +80,10 @@ namespace JobBoard.Tests
     {
       string title = "Dog Walker";
       string description = "I walk dogs.";
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "name:kim";
       JobOpening newJob = new JobOpening(title, description, contact);
-      Dictionary<string, string> result = newJob.ContactInfo;
-      CollectionAssert.AreEquivalent(contact, result);
+      string result = newJob.ContactInfo;
+      Assert.AreEqual(contact, result);
     }
 
     [TestMethod]
@@ -121,22 +91,12 @@ namespace JobBoard.Tests
     {
       string title = "Dog Walker";
       string description = "I walk dogs.";
-      Dictionary<string, string> contact = new Dictionary<string, string>
-      {
-        {"name", "Kim"},
-        {"email", "abc@gmail.com"},
-        {"phone", "5551234567"}
-      };
+      string contact = "name:kim";
       JobOpening newJob = new JobOpening(title, description, contact);
-      Dictionary<string, string> newContact = new Dictionary<string, string>
-      {
-        {"name", "Ravin"},
-        {"email", "the@email.com"},
-        {"phone", "5895554789"}
-      };
+      string newContact = "name:ravin";
       newJob.ContactInfo = newContact;
-      Dictionary<string, string> result = newJob.ContactInfo;
-      CollectionAssert.AreEquivalent(newContact, result);
+      string result = newJob.ContactInfo;
+      Assert.AreEqual(newContact, result);
     }
     [TestMethod]
     public void GetAll_ReturnsEmptyListFROMDB_JobOpeningList()
@@ -150,15 +110,24 @@ namespace JobBoard.Tests
     {
       string title1 = "Dog Walker";
       string description1 = "I walk dogs.";
-      Dictionary<string, string> contact1 = new Dictionary<string, string>
-        {
-          {"name", "Kim"},
-          {"email", "abc@gmail.com"},
-          {"phone", "5551234567"}
-        };
+      string contact1 = "me";
       JobOpening firstJob = new JobOpening(title1, description1, contact1);
       JobOpening secondJob = new JobOpening(title1, description1, contact1);
       Assert.AreEqual(firstJob, secondJob);
+    }
+    [TestMethod]
+
+    public void Save_SavesToDatabase_ItemList()
+    {
+      string title1 = "Dog Walker";
+      string description1 = "I walk dogs.";
+      string contact1 = "abc @gmail.com";
+      JobOpening testItem = new(title1, description1, contact1);
+      testItem.Save();
+      List<JobOpening> result = JobOpening.GetAll();
+      List<JobOpening> testList = new() { testItem };
+
+      CollectionAssert.AreEqual(testList, result);
     }
     // [TestMethod]
     // public void GetAll_ReturnsJobOpening_JobOpeningList()

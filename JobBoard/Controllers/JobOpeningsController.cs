@@ -20,7 +20,7 @@ namespace JobBoard.Controllers
     }
 
     [HttpPost("/jobopenings")]
-    public ActionResult Create(string title, string description, Dictionary<string, string> contact)
+    public ActionResult Create(string title, string description, string contact) //was dict contact
     {
       JobOpening newJob = new JobOpening(title, description, contact);
       return RedirectToAction("Index");
@@ -35,7 +35,7 @@ namespace JobBoard.Controllers
     }
 
     // [HttpPost("/jobopenings/details")]
-    // public ActionResult JobDetails(string title, string description, Dictionary<string, string> contact)
+    // public ActionResult JobDetails(string title, string description, string contact)
     // {
     //   // JobOpening newJob = new JobOpening(title, description, contact);
     //   return View(JobDetails);
