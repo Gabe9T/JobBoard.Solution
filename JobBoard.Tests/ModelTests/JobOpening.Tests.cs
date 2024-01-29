@@ -129,31 +129,24 @@ namespace JobBoard.Tests
 
       CollectionAssert.AreEqual(testList, result);
     }
-    // [TestMethod]
-    // public void GetAll_ReturnsJobOpening_JobOpeningList()
-    // {
-    //   string title = "Dog Walker";
-    //   string description = "I walk dogs.";
-    //   Dictionary<string, string> contact = new Dictionary<string, string>
-    //   {
-    //     {"name", "Kim"},
-    //     {"email", "abc@gmail.com"},
-    //     {"phone", "5551234567"}
-    //   };
-    //   JobOpening newJob = new JobOpening(title, description, contact);
-    //   string title1 = "Dog Groomer";
-    //   string description1 = "I groom dogs.";
-    //   Dictionary<string, string> contact1 = new Dictionary<string, string>
-    //   {
-    //     {"name", "Ravin"},
-    //     {"email", "dcb@gmail.com"},
-    //     {"phone", "5551234567"}
-    //   };
-    //   JobOpening newJob1 = new JobOpening(title, description, contact);
-    //   List<JobOpening> newList = new List<JobOpening> { newJob, newJob1};
-    //   List<JobOpening> result = JobOpening.GetAll();
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
+    [TestMethod]
+    public void GetAll_ReturnsJobOpening_JobOpeningList()
+    {
+      string title = "Dog Walker";
+      string description = "I walk dogs.";
+      string contact = "Kim";
+      JobOpening newJob = new JobOpening(title, description, contact);
+      newJob.Save();
+      string title1 = "Dog Groomer";
+      string description1 = "I groom dogs.";
+      string contact1 = "Ravin";
+      JobOpening newJob1 = new JobOpening(title1, description1, contact1);
+      newJob1.Save();
+
+      List<JobOpening> newList = new List<JobOpening> { newJob, newJob1};
+      List<JobOpening> result = JobOpening.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
     // [TestMethod]
     // public void GetId_JobsInstantiateWithAnIdAndGetterReturns_Int()
     // {
