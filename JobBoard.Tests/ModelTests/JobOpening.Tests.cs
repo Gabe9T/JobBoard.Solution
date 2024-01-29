@@ -10,9 +10,9 @@ namespace JobBoard.Tests
   public class JobOpeningTests : IDisposable
   {
 
-public IConfiguration Configuration { get; set; }
+    public IConfiguration Configuration { get; set; }
 
- public void Dispose()
+    public void Dispose()
     {
       JobOpening.ClearAll();
     }
@@ -115,9 +115,9 @@ public IConfiguration Configuration { get; set; }
       Dictionary<string, string> result = newJob.ContactInfo;
       CollectionAssert.AreEquivalent(contact, result);
     }
-    
+
     [TestMethod]
-      public void SetContactInfo_ReturnsContactInfo_Object()
+    public void SetContactInfo_ReturnsContactInfo_Object()
     {
       string title = "Dog Walker";
       string description = "I walk dogs.";
@@ -145,7 +145,21 @@ public IConfiguration Configuration { get; set; }
       List<JobOpening> result = JobOpening.GetAll();
       CollectionAssert.AreEqual(newList, result);
     }
-
+    [TestMethod]
+    public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Item()
+    {
+      string title1 = "Dog Walker";
+      string description1 = "I walk dogs.";
+      Dictionary<string, string> contact1 = new Dictionary<string, string>
+        {
+          {"name", "Kim"},
+          {"email", "abc@gmail.com"},
+          {"phone", "5551234567"}
+        };
+      JobOpening firstJob = new JobOpening(title1, description1, contact1);
+      JobOpening secondJob = new JobOpening(title1, description1, contact1);
+      Assert.AreEqual(firstJob, secondJob);
+    }
     // [TestMethod]
     // public void GetAll_ReturnsJobOpening_JobOpeningList()
     // {
@@ -212,6 +226,6 @@ public IConfiguration Configuration { get; set; }
     //   JobOpening result = JobOpening.Find(2);
     //   Assert.AreEqual(newJob1, result);
     // }
-    
+
   }
 }
