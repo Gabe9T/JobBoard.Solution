@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Net.Http.Json;
-using System.Reflection;
 using MySqlConnector;
 namespace JobBoard.Models
 {
@@ -9,7 +6,7 @@ namespace JobBoard.Models
   {
     public string Title { get; set; }
     public string Description { get; set; }
-    public int Id { get; }
+    public int Id { get; set; }
     //public Dictionary<string, string> ContactInfo { get; set; } 
     public string ContactInfo { get; set; }
 
@@ -18,10 +15,6 @@ namespace JobBoard.Models
       Title = title;
       Description = description;
       ContactInfo = contactInfo; 
-      // ?? new Dictionary<string, string>
-      // {
-      //   {"Phone", "1-800-555-5555"}
-      // };
     }
 
     public JobOpening(string title, string description, string contactInfo, int id)
@@ -70,10 +63,8 @@ namespace JobBoard.Models
       cmd.Parameters.AddWithValue("@Description", Description);
       cmd.Parameters.AddWithValue("@ContactInfo", ContactInfo);
       
-      //contact dict is contactname, phone, email
-
       cmd.ExecuteNonQuery();
-      //Id = cmd.LastInsertedId;
+      Id = (int) cmd.LastInsertedId;
       
       conn.Close();
       conn?.Dispose();
@@ -95,7 +86,10 @@ namespace JobBoard.Models
         string jobTitle = rdr.GetString(1);
         string jobDescription = rdr.GetString(2);
         string contactInfo = rdr.GetString(3);
-        JobOpening newJob = new(jobTitle, jobDescription, contactInfo, jobId);
+        JobOpening newJob = new(
+          jobTitle ?? "N/A",
+          jobDescription ?? "N/A",
+          contactInfo ?? "N/A", jobId);
         allJobs.Add(newJob);
       }
       conn.Close();
@@ -117,9 +111,32 @@ namespace JobBoard.Models
 
     public static JobOpening Find(int searchID)
     {
-      // Dictionary<string, string> contactInfo = new() { {"Phone", "1-800-555-5555"}};
-      JobOpening placeholderJob = new JobOpening("placeholder item", "1", "contact");
-      return placeholderJob;
+      MySqlConnection conn = new(DBConfiguration.ConnectionString);
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "SELECT * FROM jobOpenings WHERE id = @ThisId;";
+      MySqlParameter param = new MySqlParameter();
+      param.ParameterName = "@ThisId";
+      param.Value = searchID;
+      cmd.Parameters.Add(param);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int jobId = 0;
+      string jobDescription = "";
+      string jobTitle = "";
+      string contactInfo = "";
+      
+      while (rdr.Read())
+      {
+        jobId = rdr.GetInt32(0);
+        jobTitle = rdr.GetString(1);
+        jobDescription = rdr.GetString(2);
+        contactInfo = rdr.GetString(3);
+      }
+      JobOpening newJob = new(jobTitle, jobDescription, contactInfo, jobId);
+      conn.Close();
+      conn?.Dispose();
+      return newJob;
     }
   }
 }

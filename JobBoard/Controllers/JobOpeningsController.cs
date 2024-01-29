@@ -20,9 +20,11 @@ namespace JobBoard.Controllers
     }
 
     [HttpPost("/jobopenings")]
-    public ActionResult Create(string title, string description, string contact) //was dict contact
+    public ActionResult Create(string title, string description, string contactName, string contactEmail, string contactPhone) //was dict contact
     {
-      JobOpening newJob = new JobOpening(title, description, contact);
+      string contact = $"Name: {contactName ?? "N/A"}, Email: {contactEmail ?? "N/A"}, Phone: {contactPhone ?? "N/A"}";
+      JobOpening newJob = new(title ?? "N/A", description ?? "N/A", contact);
+      newJob.Save();
       return RedirectToAction("Index");
     }
     

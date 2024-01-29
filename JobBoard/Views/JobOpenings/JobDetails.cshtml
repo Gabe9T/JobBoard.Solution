@@ -21,12 +21,13 @@
 
     <h6>Description: @Model.Description</h6>
     <p>Contact Info: </p>
-    <ul>
+    <p>Contact Info: @Model.ContactInfo</p>
+    @* <ul>
       @foreach (KeyValuePair<string, string> contact in Model.ContactInfo)
       {
         <li>@contact.Key: @contact.Value</li>
       }
-    </ul>
+    </ul> *@
   </div>
   <button><a href="/jobopenings/new">Add a new job posting.</a></button>
   <button><a href="/jobopenings">Back to Job Listings</a></button>
